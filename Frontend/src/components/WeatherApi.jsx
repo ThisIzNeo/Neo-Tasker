@@ -7,7 +7,7 @@ const api = {
 };
 
 export default function WeatherApi() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("msila");
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +30,7 @@ export default function WeatherApi() {
     <div className="text-center p-5">
       <div>
         <input
-          className="btn rounded-none my-1 p-2 bg-slate-900"
+          className="btn rounded-none focus:outline-none my-1 p-2 bg-slate-900"
           type="text"
           placeholder="Wilaya / city"
           onChange={(e) => setSearch(e.target.value)}

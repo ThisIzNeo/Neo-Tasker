@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar";
 import TaskTable from "./components/TaskTable";
 import WeatherApi from "./components/WeatherApi";
 import axios from "axios";
+import Footer from "./components/Footer";
+import PomodoroTimer from "./components/PomodoroTimer";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,10 +52,13 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className="w-11/12 mx-auto">
         <Navbar onSearch={setSearchTerm} />
+        <hr className="opacity-5" />
       </header>
-      <main>
+      <main className="w-11/12 mx-auto">
+        <PomodoroTimer workMinutes={25} breakMinutes={5} />
+
         {/* Our Divider */}
         <div className="flex w-full flex-col lg:flex-row mt-10 p-5">
           {/* Table */}
@@ -85,6 +90,9 @@ function App() {
           taskData={taskData}
         />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
