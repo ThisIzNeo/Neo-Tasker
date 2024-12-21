@@ -27,6 +27,15 @@ export default function TaskTable({
     task.task.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/tasks/${id}`);
+      setTableData((prevData) => prevData.filter((task) => task.id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   const addOneDay = (date) => {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + 1); // Add 1 day
@@ -35,7 +44,9 @@ export default function TaskTable({
 
   return (
     <>
-      {error && <div className="absolute right-1 alert alert-success"></div>}
+      <div className="rounded-md absolute text-center font-semibold top-2 right-2">
+        {error && <a className="btn btn-success" href="/">Confirm Delete</a>}
+      </div>
       <div className="overflow-hidden">
         <button className="btn btn-primary" onClick={onOpen}>
           Create Task
@@ -79,7 +90,12 @@ export default function TaskTable({
                   {task.status ? "Completed" : "Pending"}
                 </td>
                 <th>
-                  <button className="btn bg-rose-700 ml-2 ">Delete</button>
+                  <button
+                    className="btn bg-rose-700 ml-2 "
+                    onClick={() => handleDelete(task.id)}
+                  >
+                    Delete
+                  </button>
                 </th>
               </tr>
             ))}
